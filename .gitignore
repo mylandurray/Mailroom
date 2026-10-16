@@ -1,0 +1,6 @@
+node_modules/
+dist/
+dist-single/
+*.zip
+samples/big.xlsx
+.claude/settings.local.json

@@ -1,0 +1,162 @@
+/*
+ * Shared look: colour tokens, type and the header lockup.
+ *
+ * The app maps its own token names onto the --ui-* set below rather than using
+ * these directly, so app-specific colours stay with the app and only the shared
+ * look lives here.
+ *
+ * Theme: follows the OS unless <html data-theme="light|dark"> pins it.
+ */
+
+:root {
+  /* Palette primitives. Use the semantic tokens below in UI. */
+  --ui-blue: #0074c8;
+  --ui-blue-deep: #005ea2;
+  --ui-navy: #00345a;
+  --ui-grey: #797774;
+  --ui-silver: #c8cacc;
+
+  /* Type */
+  --ui-font:
+    "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+  --ui-font-display:
+    "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+  --ui-mono: "Cascadia Mono", ui-monospace, Consolas, monospace;
+
+  /* Shape */
+  --ui-radius: 8px;
+  --ui-radius-sm: 6px;
+
+  /* Light theme */
+  color-scheme: light;
+  --ui-bg: #f3f4f5;
+  --ui-panel: #ffffff;
+  --ui-panel-soft: #f7f8f9;
+  --ui-panel-sunk: #e3e7ea;
+  --ui-hover: #eef2f6;
+  --ui-input: #ffffff;
+  --ui-border: #dfe2e5;
+  --ui-border-strong: #c5cace;
+  --ui-text: #14212c;
+  --ui-text-muted: #5e6670; /* 5.9:1 on white */
+  --ui-text-faint: #858b91;
+  --ui-accent: var(--ui-blue); /* 4.9:1 on white */
+  --ui-accent-hover: var(--ui-blue-deep);
+  --ui-accent-soft: #e6f1fa;
+  --ui-accent-text: #005a9c; /* accent-coloured text on soft fills */
+  --ui-on-accent: #ffffff;
+  --ui-focus: var(--ui-blue);
+  --ui-ok: #25784a;
+  --ui-ok-soft: #e3f2e8;
+  --ui-warn: #93580f;
+  --ui-warn-soft: #fbf0dc;
+  --ui-danger: #b3261e;
+  --ui-danger-soft: #fbe5e2;
+  --ui-overlay: #0d1b2766;
+  --ui-shadow: 0 1px 2px #0d1b270f, 0 8px 24px #0d1b2714;
+  --ui-shadow-lg: 0 24px 64px #0d1b273d;
+}
+
+/* Dark theme — same tokens, twice: once for "follow the OS", once for an explicit pin. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ui-bg: #0f161d;
+    --ui-panel: #161f28;
+    --ui-panel-soft: #1b2530;
+    --ui-panel-sunk: #121a22;
+    --ui-hover: #223040;
+    --ui-input: #111920;
+    --ui-border: #2a3642;
+    --ui-border-strong: #3a4856;
+    --ui-text: #e5eaef;
+    --ui-text-muted: #a2acb6;
+    --ui-text-faint: #7a8591;
+    --ui-accent: #3d9ae2;
+    --ui-accent-hover: #6cb4ec;
+    --ui-accent-soft: #13314b;
+    --ui-accent-text: #8cc6f2;
+    --ui-on-accent: #04182a;
+    --ui-focus: #6cb4ec;
+    --ui-ok: #6cc592;
+    --ui-ok-soft: #16301f;
+    --ui-warn: #efb55c;
+    --ui-warn-soft: #33270f;
+    --ui-danger: #f28b82;
+    --ui-danger-soft: #3a1c1a;
+    --ui-overlay: #050a0fb3;
+    --ui-shadow: 0 1px 2px #0000004d, 0 8px 24px #00000059;
+    --ui-shadow-lg: 0 24px 64px #0000008c;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-bg: #0f161d;
+  --ui-panel: #161f28;
+  --ui-panel-soft: #1b2530;
+  --ui-panel-sunk: #121a22;
+  --ui-hover: #223040;
+  --ui-input: #111920;
+  --ui-border: #2a3642;
+  --ui-border-strong: #3a4856;
+  --ui-text: #e5eaef;
+  --ui-text-muted: #a2acb6;
+  --ui-text-faint: #7a8591;
+  --ui-accent: #3d9ae2;
+  --ui-accent-hover: #6cb4ec;
+  --ui-accent-soft: #13314b;
+  --ui-accent-text: #8cc6f2;
+  --ui-on-accent: #04182a;
+  --ui-focus: #6cb4ec;
+  --ui-ok: #6cc592;
+  --ui-ok-soft: #16301f;
+  --ui-warn: #efb55c;
+  --ui-warn-soft: #33270f;
+  --ui-danger: #f28b82;
+  --ui-danger-soft: #3a1c1a;
+  --ui-overlay: #050a0fb3;
+  --ui-shadow: 0 1px 2px #0000004d, 0 8px 24px #00000059;
+  --ui-shadow-lg: 0 24px 64px #0000008c;
+}
+
+/*
+ * Header lockup:
+ *
+ *   <div class="app-lockup">
+ *     <span class="app-mark" aria-hidden="true"></span>
+ *     <span class="app-name">ToolName<small>What it does</small></span>
+ *   </div>
+ *
+ * The mark is an inline SVG, so there's no image file to ship.
+ */
+.app-lockup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--ui-text);
+}
+.app-mark {
+  display: block;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230074c8'/%3E%3Cg fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'%3E%3Crect x='6' y='9' width='20' height='14' rx='2'/%3E%3Cpath d='M6.5 10.5 16 17l9.5-6.5'/%3E%3C/g%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+.app-name {
+  display: flex;
+  margin: 0;
+  flex-direction: column;
+  font: 700 17px/1.1 var(--ui-font-display);
+  letter-spacing: -0.01em;
+  color: var(--ui-text);
+}
+.app-name small {
+  font: 400 10.5px/1.3 var(--ui-font);
+  letter-spacing: 0.02em;
+  color: var(--ui-text-muted);
+}

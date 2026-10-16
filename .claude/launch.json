@@ -1,0 +1,8 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "mailroom-dev", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "--port", "5391", "--strictPort"], "port": 5391 },
+    { "name": "mailroom-dev-alt", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "--port", "5393", "--strictPort"], "port": 5393 },
+    { "name": "mailroom-single", "runtimeExecutable": "npx", "runtimeArgs": ["vite", "preview", "--mode", "single", "--port", "5392", "--strictPort"], "port": 5392 }
+  ]
+}
